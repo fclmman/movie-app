@@ -1,0 +1,22 @@
+<ion-content class="content">
+  <form (ngSubmit)='login()'
+        [formGroup]='form'
+        class="ion-no-margin"
+        style="padding: 16px; display: flex; align-items: center; height: 100%;">
+    <ion-list lines="full" style="width: 100%;">
+      <ion-item>
+        <ion-label>Login</ion-label>
+        <ion-input placeholder="Login"
+                   type="email"
+                   [formControlName]="'email'"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Password</ion-label>
+        <ion-input placeholder="Password"
+                   type="password"
+                   [formControlName]="'password'"></ion-input>
+      </ion-item>
+      <ion-button expand="full" type="submit" style="margin-top: 40px;">Login</ion-button>
+    </ion-list>
+  </form>
+</ion-content>
