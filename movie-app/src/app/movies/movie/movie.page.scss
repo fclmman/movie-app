@@ -1,13 +1,9 @@
-.movie-list {
+.movie-item {
   padding: 12px;
   grid-gap: 12px;
   display: flex;
   flex-direction: column;
-}
-
-.movie-item {
-  display: flex;
-  grid-gap: 12px;
+  position: relative;
 }
 
 .movie-image {
@@ -22,6 +18,9 @@
 }
 
 .movie-rating {
+  position: absolute;
+  top: 24px;
+  left: 24px;
   background: #60B04C;
   color: white;
   padding: 6px;

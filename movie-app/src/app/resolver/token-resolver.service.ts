@@ -12,10 +12,13 @@ export class TokenResolverService implements Resolve<any> {
   }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | Promise<any> | any {
-    const token = this._user.getToken();
-    if (token) {
-      return this._router.navigateByUrl('/movies');
-    }
-    return true;
+    return new Promise((resolve) => {
+      this._user.getToken().then((token) => {
+        if (token) {
+          resolve(this._router.navigateByUrl('/movies'));
+        }
+        return resolve(true);
+      });
+    });
   };
 }

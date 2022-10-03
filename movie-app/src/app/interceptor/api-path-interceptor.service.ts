@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
-import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from "@angular/common/http";
-import {Observable} from "rxjs";
-import {environment} from "../../environments/environment";
+import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +20,7 @@ export class ApiPathInterceptorService implements HttpInterceptor {
   private modifyRequest = (req: HttpRequest<any>): HttpRequest<any> => {
     const endpoint = environment.backend;
     req = req.clone({
-      url: `${endpoint}${req.url}`
+      url: `${endpoint}/${req.url}`
     });
     return req;
   };

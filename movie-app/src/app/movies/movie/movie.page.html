@@ -1,0 +1,52 @@
+<ng-container *ngIf="{
+  movie: movie | async,
+  cast: cast | async,
+  comments: comments | async
+} as data">
+  <ion-header>
+    <ion-toolbar>
+      <ion-icon [routerLink]="['../']" name="arrow-back-outline"></ion-icon>
+      <ion-title>{{data.movie?.title}}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <div class="movie-item">
+      <div class="movie-rating">{{data.movie?.rating}}</div>
+      <img [src]="data.movie?.posterUrl" class="movie-image"/>
+      <div class="movie-description">
+        <p>Year: {{data.movie?.year}}</p>
+        <p>Duration: {{data.movie?.duration}}</p>
+        <p>Cast: {{data.cast?.join(', ')}}</p>
+      </div>
+      <ion-button (click)="showComments = !showComments">
+        {{showComments ? 'Hide comments' : 'Show comments'}}
+      </ion-button>
+      <form *ngIf="showComments"
+            (ngSubmit)='comment()'
+            [formGroup]='form'>
+        <ion-item class="ion-no-margin">
+          <ion-input placeholder="Your comment"
+                     type="text"
+                     [formControlName]="'message'"></ion-input>
+          <ion-button type="submit" size="default">
+            <ion-icon name="add-outline"></ion-icon>
+          </ion-button>
+        </ion-item>
+      </form>
+    </div>
+    <ion-list *ngIf="showComments">
+      <ion-item *ngFor="let c of data.comments">
+        <ion-col>
+          <ion-row>
+            <ion-label color="medium">
+              <p>{{c.created_at * 1000 | date}}</p>
+            </ion-label>
+          </ion-row>
+          <ion-row>
+            <ion-label text-wrap>{{c.message}}</ion-label>
+          </ion-row>
+        </ion-col>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ng-container>
