@@ -1,4 +1,4 @@
-import {NgModule} from '@angular/core';
+import {APP_INITIALIZER, NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {RouteReuseStrategy} from '@angular/router';
 import {IonicStorageModule} from '@ionic/storage-angular';
@@ -9,6 +9,9 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {Drivers} from '@ionic/storage';
 import {TokenInterceptorService} from './interceptor/token-interceptor.service';
 import {ApiPathInterceptorService} from './interceptor/api-path-interceptor.service';
+import {UserService} from './service/user.service';
+
+const initializeApp = (user: UserService) => async () => user.initToken();
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,6 +27,11 @@ import {ApiPathInterceptorService} from './interceptor/api-path-interceptor.serv
 
   ],
   providers: [{
+    provide: APP_INITIALIZER,
+    useFactory: initializeApp,
+    deps: [UserService],
+    multi: true
+  }, {
     provide: RouteReuseStrategy,
     useClass: IonicRouteStrategy
   }, {

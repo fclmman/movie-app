@@ -8,7 +8,6 @@ import {FormsUtil} from "../util/froms-util";
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoginPage {
   form: UntypedFormGroup;
@@ -24,9 +23,7 @@ export class LoginPage {
   }
 
   login() {
-    console.log('login')
     FormsUtil.validateAllFormFields(this.form);
-    console.log(this.form.valid, this.form)
     if (this.form.valid) {
       this._userService
         .authenticate(
@@ -37,9 +34,5 @@ export class LoginPage {
           this._router.navigateByUrl('/movies').then();
         });
     }
-  }
-
-  controlIsInvalid(controlName: string) {
-    return FormsUtil.controlIsInvalid(this.form, controlName);
   }
 }

@@ -1,0 +1,10 @@
+{
+  "/movies-api": {
+    "target": "https://sarzhevsky.com",
+    "secure": true,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/api": ""
+    }
+  }
+}

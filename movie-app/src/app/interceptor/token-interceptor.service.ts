@@ -34,7 +34,7 @@ export class TokenInterceptorService implements HttpInterceptor {
 
   private addToken(req: HttpRequest<any>): HttpRequest<any> {
     let headers: HttpHeaders = req.headers ? req.headers : new HttpHeaders();
-    const token = this._userService.getToken();
+    const token = this._userService.getCachedToken();
     if (
       token !== null &&
       token !== undefined &&

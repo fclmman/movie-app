@@ -3,7 +3,16 @@
     <ion-title>movies</ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content>
-
+  <div class="movie-list">
+    <div *ngFor="let movie of movies | async" class="movie-item">
+      <img [src]="movie.posterUrl" class="movie-image" />
+      <div class="movie-description">
+        <h3 [routerLink]="[movie.id]">{{movie.title}}</h3>
+        <div class="movie-rating">{{movie.rating}}</div>
+        <p>Year: {{movie?.year}}</p>
+        <p>Duration: {{movie?.duration}}</p>
+      </div>
+    </div>
+  </div>
 </ion-content>

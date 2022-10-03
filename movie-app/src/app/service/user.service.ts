@@ -17,9 +17,10 @@ export class UserService {
     private _storage: StorageService,
     private _router: Router
   ) {
-    this.restoreToken().then((token) => {
-      this._token = token;
-    });
+  }
+
+  async initToken() {
+    this._token = await this.restoreToken();
   }
 
   public authenticate(
@@ -33,7 +34,7 @@ export class UserService {
       })
       .pipe(
         tap((token: any) => {
-          this._token = token.token;
+          this._token = token.access_token;
           this.saveToken(this._token);
         })
       );
@@ -44,25 +45,28 @@ export class UserService {
     return this.redirectToAuth();
   }
 
-  getToken(): string {
-    console.log(this._token);
+  async getToken(): Promise<string> {
+    return this._storage.get(this._tokenName);
+  }
+
+  getCachedToken() {
     return this._token;
   }
 
-  clearToken() {
-    this._token = null;
-    this._storage.remove(this._tokenName);
+  async clearToken() {
+    await this._storage.remove(this._tokenName);
   }
 
-  redirectToAuth(redirectTo?: string) {
+  redirectToAuth() {
     this._router.navigateByUrl('/login').then();
   }
 
-  private saveToken(token: string) {
-    this._storage.set(this._tokenName, token);
+  private async saveToken(token: string) {
+    await this._storage.set(this._tokenName, token);
   }
 
-  private restoreToken() {
-    return this._storage.get(this._tokenName);
+  private async restoreToken() {
+    this._token = await this._storage.get(this._tokenName);
+    return this._token;
   }
 }

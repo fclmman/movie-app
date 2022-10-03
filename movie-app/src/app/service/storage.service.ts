@@ -16,14 +16,23 @@ export class StorageService {
   }
 
   public async set(key: string, value: string) {
-    await this.storageInstance?.set(key, value);
+    if (!this.storageInstance) {
+      await this.init();
+    }
+    await this.storageInstance.set(key, value);
   }
 
   public async remove(key: string) {
-    await this.storageInstance?.remove(key);
+    if (!this.storageInstance) {
+      await this.init();
+    }
+    await this.storageInstance.remove(key);
   }
 
   public async get(key: string): Promise<string> {
-    return await this.storageInstance?.get(key);
+    if (!this.storageInstance) {
+      await this.init();
+    }
+    return await this.storageInstance.get(key);
   }
 }
