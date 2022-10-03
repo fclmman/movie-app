@@ -23,7 +23,7 @@ export class MoviePage implements OnInit {
     this.cast = this._movies.movieCast;
     this.comments = this._movies.movieComments;
     this.form = new UntypedFormGroup({
-      message: new UntypedFormControl('', [Validators.required])
+      message: new UntypedFormControl('')
     });
   }
 
