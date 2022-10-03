@@ -30,7 +30,7 @@ export class UserService {
     return this._http
       .post(`Login`, {
         username,
-        password
+        password,
       })
       .pipe(
         tap((token: any) => {

@@ -20,7 +20,10 @@ export class ApiPathInterceptorService implements HttpInterceptor {
   private modifyRequest = (req: HttpRequest<any>): HttpRequest<any> => {
     const endpoint = environment.backend;
     req = req.clone({
-      url: `${endpoint}/${req.url}`
+      url: `${endpoint}/${req.url}`,
+      // setHeaders: {
+      //   'Content-type': `text/plain`
+      // }
     });
     return req;
   };

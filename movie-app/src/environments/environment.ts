@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  backend: '/movies-api'
+  backend: 'https://sarzhevsky.com/movies-api'
 };
 
 /*
