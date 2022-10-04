@@ -3,7 +3,7 @@ import {lastValueFrom, Observable, take} from 'rxjs';
 import {Movie} from '../../model/movie';
 import {MovieService} from '../../service/movie.service';
 import {Comment} from '../../model/comment';
-import {UntypedFormControl, UntypedFormGroup, Validators} from '@angular/forms';
+import {UntypedFormControl, UntypedFormGroup} from '@angular/forms';
 import {FormsUtil} from '../../util/froms-util';
 
 @Component({

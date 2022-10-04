@@ -40,7 +40,7 @@
                 <ion-input placeholder="Your comment"
                            type="text"
                            [formControlName]="'message'"></ion-input>
-                <ion-button type="submit" size="default">
+                <ion-button type="submit" size="default" [disabled]="!form.get('message').value">
                   <ion-icon name="add-outline"></ion-icon>
                 </ion-button>
               </ion-item>
